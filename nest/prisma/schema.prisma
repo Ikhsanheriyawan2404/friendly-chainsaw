@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model failed_jobs {
+  id         Int   @id @default(autoincrement())
+  uuid       String   @unique(map: "failed_jobs_uuid_unique") @db.VarChar(255)
+  connection String
+  queue      String
+  payload    String
+  exception  String
+  failed_at  DateTime @default(now()) @db.Timestamp(0)
+}
+
+model indonesia_cities {
+  id                  Int                @id @default(autoincrement())
+  code                String                @unique(map: "indonesia_cities_code_unique") @db.Char(4)
+  province_code       String                @db.Char(2)
+  name                String                @db.VarChar(255)
+  meta                String?
+  created_at          DateTime?             @db.Timestamp(0)
+  updated_at          DateTime?             @db.Timestamp(0)
+  indonesia_provinces indonesia_provinces   @relation(fields: [province_code], references: [code], map: "indonesia_cities_province_code_foreign")
+  indonesia_districts indonesia_districts[]
+}
+
+model indonesia_districts {
+  id                 Int               @id @default(autoincrement())
+  code               String               @unique(map: "indonesia_districts_code_unique") @db.Char(7)
+  city_code          String               @db.Char(4)
+  name               String               @db.VarChar(255)
+  meta               String?
+  created_at         DateTime?            @db.Timestamp(0)
+  updated_at         DateTime?            @db.Timestamp(0)
+  indonesia_cities   indonesia_cities     @relation(fields: [city_code], references: [code], map: "indonesia_districts_city_code_foreign")
+  indonesia_villages indonesia_villages[]
+}
+
+model indonesia_provinces {
+  id               Int             @id @default(autoincrement())
+  code             String             @unique(map: "indonesia_provinces_code_unique") @db.Char(2)
+  name             String             @db.VarChar(255)
+  meta             String?
+  created_at       DateTime?          @db.Timestamp(0)
+  updated_at       DateTime?          @db.Timestamp(0)
+  indonesia_cities indonesia_cities[]
+}
+
+model indonesia_villages {
+  id                  Int              @id @default(autoincrement())
+  code                String              @unique(map: "indonesia_villages_code_unique") @db.Char(10)
+  district_code       String              @db.Char(7)
+  name                String              @db.VarChar(255)
+  meta                String?
+  created_at          DateTime?           @db.Timestamp(0)
+  updated_at          DateTime?           @db.Timestamp(0)
+  indonesia_districts indonesia_districts @relation(fields: [district_code], references: [code], map: "indonesia_villages_district_code_foreign")
+}
+
+model migrations {
+  id        Int    @id @default(autoincrement())
+  migration String @db.VarChar(255)
+  batch     Int
+}
+
+model password_reset_tokens {
+  email      String    @id @db.VarChar(255)
+  token      String    @db.VarChar(255)
+  created_at DateTime? @db.Timestamp(0)
+}
+
+model permintaans {
+  id         Int    @id @default(autoincrement())
+  text       String    @db.VarChar(255)
+  created_at DateTime? @db.Timestamp(0)
+  updated_at DateTime? @db.Timestamp(0)
+}
+
+model personal_access_tokens {
+  id             Int    @id @default(autoincrement())
+  tokenable_type String    @db.VarChar(255)
+  tokenable_id   Int
+  name           String    @db.VarChar(255)
+  token          String    @unique(map: "personal_access_tokens_token_unique") @db.VarChar(64)
+  abilities      String?
+  last_used_at   DateTime? @db.Timestamp(0)
+  expires_at     DateTime? @db.Timestamp(0)
+  created_at     DateTime? @db.Timestamp(0)
+  updated_at     DateTime? @db.Timestamp(0)
+
+  @@index([tokenable_type, tokenable_id], map: "personal_access_tokens_tokenable_type_tokenable_id_index")
+}
+
+model users {
+  id                Int    @id @default(autoincrement())
+  name              String    @db.VarChar(255)
+  email             String    @unique(map: "users_email_unique") @db.VarChar(255)
+  email_verified_at DateTime? @db.Timestamp(0)
+  password          String    @db.VarChar(255)
+  remember_token    String?   @db.VarChar(100)
+  created_at        DateTime? @db.Timestamp(0)
+  updated_at        DateTime? @db.Timestamp(0)
+}
