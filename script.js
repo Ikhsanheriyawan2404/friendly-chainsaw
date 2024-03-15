@@ -59,7 +59,7 @@ export default function() {
   // GOLANG
   // http.get('http://192.168.123.6:8080/getTestData');
   http.get('http://192.168.123.6:8080/simple');
-  // sleep(1);
+  sleep(1);
 
   // PHP
   // http.get('http://192.168.123.6/perbandingan/php/index.php');

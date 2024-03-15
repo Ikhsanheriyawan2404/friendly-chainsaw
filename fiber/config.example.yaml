@@ -1,0 +1,9 @@
+app:
+  version: "1.0.0"
+
+database:
+  host: "localhost"
+  name: "gorm"
+  username: "postgres"
+  password: "postgres"
+  port: 5432

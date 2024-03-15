@@ -2,7 +2,7 @@ const express = require('express');
 const { PrismaClient } = require('@prisma/client');
 const Redis = require("ioredis");
 
-const redis = new Redis();
+const redis = new Redis(6379, "redis");
 
 const app = express();
 const port = process.env.PORT || 4001;

@@ -2,10 +2,10 @@
 
 // Konfigurasi database PostgreSQL
 $host = "localhost";
-$port = "5432";
+$port = "5433";
 $username = "postgres";
 $password = "admin";
-$database = "inv";
+$database = "perbandingan_test";
 
 // Koneksi ke database
 $conn = new PDO("pgsql:host=$host;port=$port;dbname=$database;user=$username;password=$password");
