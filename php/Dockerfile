@@ -16,7 +16,7 @@ RUN docker-php-ext-enable pdo_pgsql
 COPY . .
 
 # Expose port 80 (sesuaikan dengan port yang digunakan oleh aplikasi Anda)
-EXPOSE 81
+EXPOSE 8001
 
 # Command to run the PHP application
-CMD [ "php", "-S", "0.0.0.0:81" ]
+CMD [ "php", "-S", "0.0.0.0:8001" ]

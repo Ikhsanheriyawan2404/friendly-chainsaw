@@ -17,7 +17,7 @@ COPY . .
 RUN npx prisma generate
 
 # Expose port 82 (sesuaikan dengan port yang digunakan oleh aplikasi Anda)
-EXPOSE 82
+EXPOSE 8002
 
 # Command to run the application
 CMD [ "node", "index.js" ]

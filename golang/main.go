@@ -40,7 +40,7 @@ type Response struct {
 var db *gorm.DB
 
 func main() {
-	dsn := "user=postgres password=admin dbname=inv sslmode=disable"
+	dsn := "host=db user=postgres password=admin dbname=perbandingan_testing port=5433 sslmode=disable"
 	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("Failed to connect to database")
@@ -65,7 +65,7 @@ func main() {
 
 	http.HandleFunc("/getTestData", getTestData)
 
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := http.ListenAndServe(":8090", nil); err != nil {
 		fmt.Println("Error:", err)
 	}
 }

@@ -58,7 +58,13 @@ export const options = {
 export default function() {
   // GOLANG
   // http.get('http://192.168.123.6:8080/getTestData');
-  http.get('http://192.168.123.6:8080/simple');
+  // http.get('http://127.0.0.1:4001/api/hello');
+  // php swoole
+  // http.get('http://192.168.1.212:8101');
+  // php native
+  // http.get('http://192.168.1.212:8001/simple.php');
+  // node js
+  http.get('http://192.168.1.212:4001/simple');
   sleep(1);
 
   // PHP
