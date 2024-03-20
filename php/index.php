@@ -1,7 +1,7 @@
 <?php
 
 // Konfigurasi database PostgreSQL
-$host = "db ";
+$host = "db";
 $port = "5433";
 $username = "postgres";
 $password = "admin";

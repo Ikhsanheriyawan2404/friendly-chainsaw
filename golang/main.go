@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"sync"
+	// "sync"
 	"net/http"
-	"gorm.io/gorm"
-	"gorm.io/driver/postgres"
+	// "gorm.io/gorm"
+	// "gorm.io/driver/postgres"
 )
 
 type Village struct {
@@ -37,10 +37,10 @@ type Response struct {
 	Message string `json:"message"`
 }
 
-var db *gorm.DB
+// var db *gorm.DB
 
 func main() {
-	// dsn := "host=localhost user=postgres password=admin dbname=perbandingan_testing port=5432 sslmode=disable"
+	// dsn := "host=db user=postgres password=admin dbname=perbandingan_testing port=5432 sslmode=disable"
 	// database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	// if err != nil {
 	// 	panic("Failed to connect to database")
@@ -70,43 +70,43 @@ func main() {
 	}
 }
 
-func getTestData(w http.ResponseWriter, r *http.Request) {
-	var (
-		villages   []Village
-		provinces  []Province
-		districts  []District
-		cities     []City
-		wg         sync.WaitGroup
-		resultData = make(map[string]interface{})
-	)
+// func getTestData(w http.ResponseWriter, r *http.Request) {
+// 	var (
+// 		villages   []Village
+// 		provinces  []Province
+// 		districts  []District
+// 		cities     []City
+// 		wg         sync.WaitGroup
+// 		resultData = make(map[string]interface{})
+// 	)
 
-	wg.Add(4)
-	go func() {
-		defer wg.Done()
-		db.Table("indonesia_villages").Select("id, name, meta").Find(&villages)
-		resultData["villages"] = villages
-	}()
+// 	wg.Add(4)
+// 	go func() {
+// 		defer wg.Done()
+// 		db.Table("indonesia_villages").Select("id, name, meta").Find(&villages)
+// 		resultData["villages"] = villages
+// 	}()
 
-	go func() {
-		defer wg.Done()
-		db.Table("indonesia_provinces").Select("id, name, meta").Find(&provinces)
-		resultData["provinces"] = provinces
-	}()
+// 	go func() {
+// 		defer wg.Done()
+// 		db.Table("indonesia_provinces").Select("id, name, meta").Find(&provinces)
+// 		resultData["provinces"] = provinces
+// 	}()
 
-	go func() {
-		defer wg.Done()
-		db.Table("indonesia_districts").Select("id, name, meta").Find(&districts)
-		resultData["districts"] = districts
-	}()
+// 	go func() {
+// 		defer wg.Done()
+// 		db.Table("indonesia_districts").Select("id, name, meta").Find(&districts)
+// 		resultData["districts"] = districts
+// 	}()
 
-	go func() {
-		defer wg.Done()
-		db.Table("indonesia_cities").Select("id, name, meta").Find(&cities)
-		resultData["cities"] = cities
-	}()
+// 	go func() {
+// 		defer wg.Done()
+// 		db.Table("indonesia_cities").Select("id, name, meta").Find(&cities)
+// 		resultData["cities"] = cities
+// 	}()
 
-	wg.Wait()
+// 	wg.Wait()
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(resultData)
-}
+// 	w.Header().Set("Content-Type", "application/json")
+// 	json.NewEncoder(w).Encode(resultData)
+// }

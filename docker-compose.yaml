@@ -20,8 +20,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - db
+
   redis:
     container_name: redis
     image: 'redis'
@@ -39,9 +38,8 @@ services:
   #     - php
   #     - node-express
   #     - nest
-  
+
   php:
-    restart: on-failure
     container_name: php
     build: ./php
     hostname: php
@@ -50,10 +48,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    networks:
-      - db
+
   php-swoole:
-    restart: on-failure
     container_name: php-swoole
     build: ./php-swoole
     hostname: php-swoole
@@ -64,7 +60,6 @@ services:
         condition: service_healthy
 
   node-express:
-    restart: on-failure
     container_name: node-express
     build: ./node_express
     hostname: node-express
@@ -73,11 +68,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    networks:
-      - db
       
   nest:
-    restart: on-failure
     container_name: nest
     build: ./nest
     hostname: nest
@@ -88,7 +80,6 @@ services:
         condition: service_healthy
   
   fiber:
-    restart: on-failure
     container_name: fiber
     build: ./fiber
     hostname: fiber
@@ -99,7 +90,6 @@ services:
         condition: service_healthy
 
   golang:
-    restart: on-failure
     container_name: golang
     build: ./golang
     hostname: golang
@@ -108,14 +98,9 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    networks:
-      - db
 
 volumes:
   db-data:
-
-networks:
-  db:
 
 secrets:
   db-password:
