@@ -3,7 +3,7 @@ import { sleep } from 'k6';
 
 export const options = {
   // A number specifying the number of VUs to run concurrently.
-  vus: 10,
+  vus: 1000,
   // A string specifying the total duration of the test run.
   duration: '30s',
 
@@ -56,21 +56,18 @@ export const options = {
 // about authoring k6 scripts.
 //
 export default function() {
-  // GOLANG
-  // http.get('http://192.168.123.6:8080/getTestData');
-  // http.get('http://127.0.0.1:4001/api/hello');
   // php swoole
   // http.get('http://192.168.1.212:8101');
+
   // php native
   // http.get('http://192.168.1.212:8001/simple.php');
+
   // node js
   // http.get('http://192.168.1.212:4001/simple');
-  
-  //
-  // http.get('https://167.172.138.236');
-  // http.get('https://128.199.127.12');
-  http.get('https://ewakoperasi.hartanahgroup.com');
 
+  // golang
+  http.get('http://192.168.1.212:8090/simple');
+  
   sleep(1);
 
   // PHP
