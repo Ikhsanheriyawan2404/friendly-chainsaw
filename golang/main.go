@@ -40,12 +40,12 @@ type Response struct {
 var db *gorm.DB
 
 func main() {
-	dsn := "host=db user=postgres password=admin dbname=perbandingan_testing port=5433 sslmode=disable"
-	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	if err != nil {
-		panic("Failed to connect to database")
-	}
-	db = database
+	// dsn := "host=localhost user=postgres password=admin dbname=perbandingan_testing port=5432 sslmode=disable"
+	// database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	// if err != nil {
+	// 	panic("Failed to connect to database")
+	// }
+	// db = database
 
 	http.HandleFunc("/simple", func(w http.ResponseWriter, r *http.Request) {
 		response := Response{
@@ -63,7 +63,7 @@ func main() {
 		w.Write(jsonData)
 	})
 
-	http.HandleFunc("/getTestData", getTestData)
+	// http.HandleFunc("/getTestData", getTestData)
 
 	if err := http.ListenAndServe(":8090", nil); err != nil {
 		fmt.Println("Error:", err)
