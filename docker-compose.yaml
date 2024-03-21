@@ -71,7 +71,7 @@ services:
       
   nest:
     container_name: nest
-    build: ./nest
+    build: ./simple-nest
     hostname: nest
     ports:
       - '4002:4001'
@@ -81,7 +81,7 @@ services:
   
   fiber:
     container_name: fiber
-    build: ./fiber
+    build: ./simple-fiber
     hostname: fiber
     ports:
       - '8080:8080'
