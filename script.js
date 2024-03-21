@@ -3,7 +3,7 @@ import { sleep } from 'k6';
 
 export const options = {
   // A number specifying the number of VUs to run concurrently.
-  vus: 1000,
+  vus: 10,
   // A string specifying the total duration of the test run.
   duration: '30s',
 
@@ -66,8 +66,14 @@ export default function() {
   // http.get('http://192.168.1.212:4001/simple');
 
   // golang
-  http.get('http://192.168.1.212:8090/simple');
+  // http.get('http://192.168.1.212:8090/simple');
   
+  // fiber
+  // http.get('http://192.168.1.212:8080/simple');
+  
+  // nest 
+  // http.get('http://192.168.1.212:4002');
+
   sleep(1);
 
   // PHP

@@ -27,17 +27,17 @@ services:
     ports:
       - '6379:6379'
   
-  # nginx:
-  #   image: nginx:latest
-  #   container_name: nginx
-  #   ports:
-  #     - '80:80'
-  #   volumes:
-  #     - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-  #   depends_on:
-  #     - php
-  #     - node-express
-  #     - nest
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - golang
+      - golang2
+      - golang3
 
   php:
     container_name: php
@@ -95,6 +95,24 @@ services:
     hostname: golang
     ports:
       - '8090:8090'
+    depends_on:
+      db:
+        condition: service_healthy
+  golang2:
+    container_name: golang2
+    build: ./golang
+    hostname: golang2
+    ports:
+      - '8091:8090'
+    depends_on:
+      db:
+        condition: service_healthy
+  golang3:
+    container_name: golang3
+    build: ./golang
+    hostname: golang3
+    ports:
+      - '8092:8090'
     depends_on:
       db:
         condition: service_healthy
