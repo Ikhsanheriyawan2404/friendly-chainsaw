@@ -3,7 +3,7 @@ import { sleep } from 'k6';
 
 export const options = {
   // A number specifying the number of VUs to run concurrently.
-  vus: 10,
+  vus: 500,
   // A string specifying the total duration of the test run.
   duration: '30s',
 
@@ -73,6 +73,10 @@ export default function() {
   
   // nest 
   // http.get('http://192.168.1.212:4002');
+  http.get('http://192.168.19.252:4000');
+
+
+  
 
   sleep(1);
 
